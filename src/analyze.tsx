@@ -1,6 +1,6 @@
-import { Action, ActionPanel, Detail, confirmAlert, Icon, LaunchProps, popToRoot } from "@raycast/api";
-import { useEffect, useState } from "react";
+import { Action, ActionPanel, confirmAlert, Detail, Icon, LaunchProps, popToRoot } from "@raycast/api";
 import fetch from "node-fetch";
+import { useEffect, useState } from "react";
 
 interface Website {
   url: string;
@@ -142,7 +142,7 @@ export default function Command(props: LaunchProps<{ arguments: Website }>) {
         "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
         "(\\?[;&a-z\\d%_.~+=-]*)?" +
         "(\\#[-a-z\\d_]*)?$",
-      "i"
+      "i",
     );
 
     return !!pattern.test(url);
@@ -282,7 +282,6 @@ export default function Command(props: LaunchProps<{ arguments: Website }>) {
                       clearSearchBar: false,
                     });
                   }}
-                  shortcut={{ modifiers: ["cmd"], key: "a" }}
                   icon={Icon.Repeat}
                 />
                 {score !== 6 && !tips && (
@@ -303,6 +302,20 @@ export default function Command(props: LaunchProps<{ arguments: Website }>) {
                     }}
                     shortcut={{ modifiers: ["cmd"], key: "t" }}
                     icon={Icon.LightBulb}
+                  />
+                )}
+                {sidebar.title && (
+                  <Action.CopyToClipboard
+                    title="Copy Page Title"
+                    content={sidebar.title}
+                    shortcut={{ modifiers: ["cmd", "shift"], key: "t" }}
+                  />
+                )}
+                {sidebar.description && (
+                  <Action.CopyToClipboard
+                    title="Copy Page Description"
+                    content={sidebar.description}
+                    shortcut={{ modifiers: ["cmd", "shift"], key: "d" }}
                   />
                 )}
               </ActionPanel>
