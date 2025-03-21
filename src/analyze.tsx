@@ -1,5 +1,4 @@
 import { Action, ActionPanel, confirmAlert, Detail, Icon, LaunchProps, popToRoot } from "@raycast/api";
-import fetch from "node-fetch";
 import { useEffect, useState } from "react";
 
 interface Website {
@@ -152,7 +151,7 @@ export default function Command(props: LaunchProps<{ arguments: Website }>) {
     try {
       const response = await fetch(url);
       return response.status === 200;
-    } catch (error) {
+    } catch {
       return false;
     }
   };
